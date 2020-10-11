@@ -2,6 +2,9 @@ import os
 import sys
 import laugh_segmenter
 import tgt
+import pandas as pd
+import warnings
+warnings.filterwarnings("ignore")
 
 def seconds_to_frames(s):
 	return(int(s*100))
@@ -54,8 +57,7 @@ if __name__ == '__main__':
 		input_path, model_path, output_path, threshold, min_length, save_to_textgrid = parse_inputs()
 		min_length = seconds_to_frames(min_length)
 
-		laughs = laugh_segmenter.segment_laughs(input_path, model_path, output_path,
-                                                        threshold, min_length, save_to_textgrid) 
+		laughs = laugh_segmenter.segment_laughs(input_path, model_path, output_path, threshold, min_length, save_to_textgrid)
 		print(); print("found %d laughs." % (len (laughs)))
 
 		if not save_to_textgrid:
@@ -72,4 +74,15 @@ if __name__ == '__main__':
 			print('Saved laughter segments in {}'.format(
 				os.path.join(output_path, fname + '_laughter.TextGrid')))
 
+		print("Saving laughs...")
 
+		name_file = str(input_path)
+		name_file = name_file.split("/")[1]
+		name_file = name_file.split(".")[0]
+
+		df = pd.DataFrame(laughs)
+		df.to_csv('Results/{}.csv'.format(name_file))
+
+		# with open('Results/{}.txt'.format(name_file), 'w') as f:
+		# 	for item in laughs:
+		# 		f.write("%s\n" % item)

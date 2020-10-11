@@ -10,8 +10,10 @@ import os
 import sys
 import librosa
 import keras
-from keras.models import load_model
+from keras.models import load_model, model_from_config
 import scipy.io.wavfile
+import warnings
+warnings.filterwarnings("ignore")
 
 import compute_features
 
@@ -63,9 +65,9 @@ def get_laughter_instances(probs, threshold = 0.5, min_length = 0.2):
 			if len(current_list) > 0:
 				instances.append(current_list)
 				current_list = []
-	for i in instances:
-		print(i)
-		print()
+	# for i in instances:
+	# 	print(i)
+	# 	print()
 	instances = [frame_span_to_time_span(collapse_to_start_and_end_frame(i)) for i in instances if len(i) > min_length]
 	return instances
 
@@ -100,7 +102,8 @@ def segment_laughs(input_path, model_path, output_path, threshold=0.5, min_lengt
 	probs = model.predict_proba(feature_list)
 	probs = probs.reshape((len(probs),))#.reshape((len(mfcc_feat),))
 	filtered = lowpass(probs)
-	instances = get_laughter_instances(filtered, threshold=threshold, min_length=min_length)
+	instances = get_laughter_instances(
+		filtered, threshold=threshold, min_length=min_length)
 
 	if len(instances) > 0:
 
@@ -123,7 +126,6 @@ def segment_laughs(input_path, model_path, output_path, threshold=0.5, min_lengt
 		#else:
 
 			return([{'start': i[0], 'end': i[1]} for i in instances])
-
 	else:
 		return []
-	
+
