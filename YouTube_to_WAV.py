@@ -14,6 +14,7 @@ except IndexError:
 #Previous versions of youtube-dl can be slow for downloading audio. Make sure you have downloaded the latest version from webpage.
 #https://github.com/rg3/youtube-dl
 mypath = "/Users/luisahumada/GWU/NLP/stand-up/AudioFiles"
+#mypath = os.getcwd() + "/AudioFiles"
 os.chdir(mypath)
 os.system("youtube-dl --extract-audio " + link)
 
