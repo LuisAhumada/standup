@@ -55,7 +55,7 @@ def parse_inputs():
 if __name__ == '__main__':
 	if parse_inputs():
 		input_path, model_path, output_path, threshold, min_length, save_to_textgrid = parse_inputs()
-		min_length = seconds_to_frames(min_length)
+		min_length = seconds_to_frames(min_length); print(input_path); print(model_path)
 
 		laughs = laugh_segmenter.segment_laughs(input_path, model_path, output_path, threshold, min_length, save_to_textgrid)
 		print(); print("found %d laughs." % (len (laughs)))

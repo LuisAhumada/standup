@@ -7,8 +7,13 @@ warnings.filterwarnings("ignore")
 # 1. Downloading YouTube files to .wav
 #----------------------------------------------------------------------------------------------------
 
-links = ["https://www.youtube.com/watch?v=KijAPJXjg8c", "https://www.youtube.com/watch?v=Fv3fkcCrn6k", "https://youtu.be/jQHN1ipLPdY"]
-for i in links:
+#links = ["https://www.youtube.com/watch?v=KijAPJXjg8c", "https://www.youtube.com/watch?v=Fv3fkcCrn6k", "https://youtu.be/jQHN1ipLPdY"]
+data = pd.read_csv("./data/Comedians Dataset - Comedians.csv")
+data = data.dropna(subset=["Link"])
+data = data.tail(1)
+print(data)
+for i in data["Link"]:
+    print(i)
     os.system("python YouTube_to_WAV.py {}".format(i))
 
 
@@ -28,6 +33,7 @@ for file in os.listdir(directory):
 #----------------------------------------------------------------------------------------------------
 
 for filename in os.listdir(directory):
+    print(filename)
     os.system("python segment_laughter.py AudioFiles/{} models/model.h5 my_folder 0.8 1".format(filename))
 
 

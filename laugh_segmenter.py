@@ -95,7 +95,7 @@ def segment_laughs(input_path, model_path, output_path, threshold=0.5, min_lengt
 	y,sr = librosa.load(input_path,sr=8000)
 	full_res_y, full_res_sr = librosa.load(input_path,sr=44100)
 	
-	print(); print('Looking for laughter...'); print()
+	print(); print('Looking for laughter...'); print(); print(model_path)
 	model = load_model(model_path)
 	feature_list = get_feature_list(y,sr)
 

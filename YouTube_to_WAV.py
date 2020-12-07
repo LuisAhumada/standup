@@ -13,12 +13,15 @@ except IndexError:
 #Also make sure that youtube-dl and ffmpeg installed.
 #Previous versions of youtube-dl can be slow for downloading audio. Make sure you have downloaded the latest version from webpage.
 #https://github.com/rg3/youtube-dl
-mypath = "/Users/luisahumada/GWU/NLP/stand-up/AudioFiles"
-#mypath = os.getcwd() + "/AudioFiles"
+#mypath = "/Users/luisahumada/GWU/NLP/stand-up/AudioFiles"
+mypath = os.getcwd() + "/AudioFiles"
 os.chdir(mypath)
 os.system("youtube-dl --extract-audio " + link)
-
-vidID= link.split("=")[1]
+print(link)
+vidID = link.split("v=")[1]
+if len(vidID) == 1:
+    vidID = link.split("e/")[1]
+#vidID= link.split("=")[1]
 print("VidID = " + vidID)
 f = []
 for (dirpath, dirnames, filenames) in walk(mypath):
