@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore")
 #links = ["https://www.youtube.com/watch?v=KijAPJXjg8c", "https://www.youtube.com/watch?v=Fv3fkcCrn6k", "https://youtu.be/jQHN1ipLPdY"]
 data = pd.read_csv("./data/Comedians Dataset - Comedians.csv")
 data = data.dropna(subset=["Link"])
-data = data.tail(1)
+data = data.tail(4)
 print(data)
 for i in data["Link"]:
     print(i)
@@ -48,6 +48,7 @@ for file in os.listdir(results):
     df_list.append(csv)
 
 for df in df_list:
-    df.drop('Unnamed: 0', axis= 1, inplace=True)
-    df["Duration"] = df["end"] - df["start"]
-    print(df)
+    if df.size != 0:
+        df.drop('Unnamed: 0', axis= 1, inplace=True)
+        df["Duration"] = df["end"] - df["start"]
+        print(df)
