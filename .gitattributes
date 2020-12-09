@@ -3,3 +3,4 @@ DC.wav filter=lfs diff=lfs merge=lfs -text
 *.py filter=lfs diff=lfs merge=lfs -text
 *.csv filter=lfs diff=lfs merge=lfs -text
 *.h5 filter=lfs diff=lfs merge=lfs -text
+AudioFiles/DC.wav filter=lfs diff=lfs merge=lfs -text
